@@ -22,6 +22,6 @@ public class Produtos {
     @Column(name = "nome", nullable = false, length = 200)
     private String nome;
 
-    @Column(name = "valor", nullable = false, precision = 200, scale = 2)
+    @Column(name = "valor", nullable = false, precision = 16, scale = 2)
     private BigDecimal valor;
 }
