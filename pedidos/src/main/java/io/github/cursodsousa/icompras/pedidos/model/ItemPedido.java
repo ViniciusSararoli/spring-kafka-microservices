@@ -23,10 +23,10 @@ public class ItemPedido {
     private Long iditem_pedido;
 
     @Column(name = "idpedido", nullable = false)
-    private Long idpedido;
+    private Long idPedido;
 
     @Column(name = "idproduto", nullable = false)
-    private Long idproduto;
+    private Long idProduto;
 
     @Column(name = "quantidade", nullable = false)
     private Integer quantidade;

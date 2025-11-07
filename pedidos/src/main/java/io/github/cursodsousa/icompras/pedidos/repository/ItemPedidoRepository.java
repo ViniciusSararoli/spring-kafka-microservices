@@ -1,0 +1,11 @@
+package io.github.cursodsousa.icompras.pedidos.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import io.github.cursodsousa.icompras.pedidos.model.ItemPedido;
+
+@Repository
+public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Long> {
+
+}
