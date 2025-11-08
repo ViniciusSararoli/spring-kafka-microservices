@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import io.github.cursodsousa.icompras.pedidos.model.enums.StatusPedido;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -59,6 +60,6 @@ public class Pedido {
     @Transient // Indica que este campo não será persistido no banco de dados
     private DadosPagamento dadosPagamento;
 
-    @OneToMany(mappedBy = "idPedido") //   Indica o relacionamento com ItemPedido
+    @OneToMany(mappedBy = "pedido") // relacionamento é mapeado pelo campo 'pedido' em ItemPedido
     private List<ItemPedido> itens;
 }
