@@ -22,6 +22,9 @@ public class PedidoController {
     public ResponseEntity<Object> criar(@RequestBody NovoPedidoDTO novoPedidoDTO) {
         var pedido = pedidoMapper.map(novoPedidoDTO);
         var novoPedido = pedidoService.criar(pedido);
-        return ResponseEntity.ok(novoPedido.getIdpedido());
+        var json = "{ \"pedidoId\": "
+                + novoPedido.getIdpedido() + ", \"total\": " + novoPedido.getTotal() + ", \"status\": \""
+                + novoPedido.getStatus() + "\", \"dia\": \"" + novoPedido.getDia() + "\" }";
+        return ResponseEntity.ok(json);
     }
 }
