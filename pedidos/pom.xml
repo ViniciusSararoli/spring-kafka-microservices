@@ -29,10 +29,9 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<mapstruct.version>1.6.0</mapstruct.version>		<!-- BIBLIOTECA PARA MAPEAR ENTIDADES
-		BIBLIOTECAS -->
-		<lombok.mapstruct.binding.version>0.2.0</lombok.mapstruct.binding.version>		<!--  Usado para
-		gerar o compilados -->
+		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+		<lombok.version>1.18.30</lombok.version>
+		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<!-- <sprong-cloud.version>2022.0.4</sprong-cloud.version> -->
 	</properties>
 
@@ -43,7 +42,7 @@
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
-			<version>${mapstruct.version}</version>
+			<version>${org.mapstruct.version}</version>
 		</dependency>
 		<!-- *********************************** -->
 		<dependency>
@@ -63,6 +62,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -82,21 +82,24 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<!-- version is managed by Spring Boot parent; you may add an explicit version if desired -->
+							<version>${lombok.version}</version>
 						</path>
 						<!-- Adicionado para executar na compilação e funcionar as dependencias -->
 						<path>
 							<groupId>org.mapstruct</groupId>
 							<artifactId>mapstruct-processor</artifactId>
-							<version>${mapstruct.version}</version>
+							<version>${org.mapstruct.version}</version>
 						</path>
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok-mapstruct-binding</artifactId>
-							<version>${lombok.mapstruct.binding.version}</version>
+							<version>${lombok-mapstruct-binding.version}</version>
 						</path>
 						<!-- *************************************** -->
 					</annotationProcessorPaths>
+					<compilerArgs>
+						<arg>-Amapstruct.verbose=true</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>

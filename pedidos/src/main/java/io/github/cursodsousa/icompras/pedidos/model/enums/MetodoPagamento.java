@@ -1,9 +1,9 @@
 package io.github.cursodsousa.icompras.pedidos.model.enums;
 
 public enum MetodoPagamento {
-    CARTAO_CREDITO,
-    CARTAO_DEBITO,
-    BOLETO_BANCARIO,
-    DEBITO_BANCARIO,
+    CREDIT_CARD,
+    DEBIT_CARD,
+    BANK_SLIP,
+    DIRECT_DEBIT,
     PIX
 }

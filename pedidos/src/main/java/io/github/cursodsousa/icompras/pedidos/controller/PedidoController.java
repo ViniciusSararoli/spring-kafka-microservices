@@ -1,14 +1,13 @@
 package io.github.cursodsousa.icompras.pedidos.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import io.github.cursodsousa.icompras.pedidos.controller.dto.NovoPedidoDTO;
+import io.github.cursodsousa.icompras.pedidos.controller.mappers.PedidoMapper;
 import io.github.cursodsousa.icompras.pedidos.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 
@@ -17,14 +16,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PedidoController {
     private final PedidoService pedidoService;
+    private final PedidoMapper pedidoMapper;
 
     @PostMapping
-    public ResponseEntity<Long> criar(@RequestBody NovoPedidoDTO novoPedidoDTO) {
-        try {
-            var pedido = pedidoService.criar(novoPedidoDTO);
-            return ResponseEntity.ok(pedido.getIdpedido());
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+    public ResponseEntity<Object> criar(@RequestBody NovoPedidoDTO novoPedidoDTO) {
+        var pedido = pedidoMapper.map(novoPedidoDTO);
+        var novoPedido = pedidoService.criar(pedido);
+        var json = "{ \"pedidoId\": "
+                + novoPedido.getIdpedido() + ", \"total\": " + novoPedido.getTotal() + ", \"status\": \""
+                + novoPedido.getStatus() + "\", \"dia\": \"" + novoPedido.getDia() + "\" }";
+        return ResponseEntity.ok(json);
     }
 }

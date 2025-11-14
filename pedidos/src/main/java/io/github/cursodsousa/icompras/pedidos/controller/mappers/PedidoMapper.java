@@ -2,60 +2,50 @@ package io.github.cursodsousa.icompras.pedidos.controller.mappers;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.mapstruct.AfterMapping;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
-import org.mapstruct.factory.Mappers;
 
-import io.github.cursodsousa.icompras.pedidos.controller.dto.ItemPedidoDTO;
 import io.github.cursodsousa.icompras.pedidos.controller.dto.NovoPedidoDTO;
-import io.github.cursodsousa.icompras.pedidos.model.ItemPedido;
 import io.github.cursodsousa.icompras.pedidos.model.Pedido;
 import io.github.cursodsousa.icompras.pedidos.model.enums.StatusPedido;
 
-@Mapper(componentModel = "spring", imports = { LocalDateTime.class, StatusPedido.class,
-        BigDecimal.class }, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", uses = ItemPedidoMapper.class)
 public interface PedidoMapper {
 
-    ItemPedidoMapper ITEM_PEDIDO_MAPPER = Mappers.getMapper(ItemPedidoMapper.class);
-
+    @BeanMapping(unmappedTargetPolicy = ReportingPolicy.IGNORE)
     @Mapping(source = "clienteId", target = "idCliente")
-    // @Mapping(target = "dia", expression = "java(LocalDateTime.now())")
-    // @Mapping(target = "status", expression = "java(StatusPedido.PENDENTE)")
-    // @Mapping(target = "total", expression = "java(BigDecimal.ZERO)")
-    @Mapping(target = "itens", source = "itens", qualifiedByName = "itemPedidoListToEntityList")
-    // Não precisa mapear, pois os campos são iguais do DadosPagamentoDTO com o
-    // DaadosPagamento
+    @Mapping(target = "itens", source = "itens")
     Pedido map(NovoPedidoDTO novoPedidoDTO);
 
-    @Named("itemPedidoListToEntityList")
-    default List<ItemPedido> itemPedidoListToEntityList(List<ItemPedidoDTO> dtos) {
-        return dtos.stream()
-                .map(ITEM_PEDIDO_MAPPER::map)
-                .toList();
-    }
-
     @AfterMapping
-    default void afterMapping(@MappingTarget Pedido pedido) {
-        // Método para qualquer lógica adicional após o mapeamento, se necessário
+    default void afterMapping(NovoPedidoDTO dto, @MappingTarget Pedido pedido) {
+        // Define dia e status inicial
         pedido.setDia(LocalDateTime.now());
         pedido.setStatus(StatusPedido.AGUARDANDO_PAGAMENTO);
 
-        var total = calcularTotalPedido(pedido);
+        // Se não houver itens, evita NPE e define total 0
+        if (pedido.getItens() == null || pedido.getItens().isEmpty()) {
+            pedido.setTotal(BigDecimal.ZERO);
+            return;
+        }
 
+        // Calcula total e associa o pedido em cada item
+        var total = calcularTotalPedido(pedido);
         pedido.setTotal(total);
+
+        pedido.getItens().forEach(item -> item.setPedido(pedido));
     }
 
     private static BigDecimal calcularTotalPedido(Pedido pedido) {
         return pedido.getItens().stream()
                 .map(item -> item.getValor().multiply(BigDecimal.valueOf(item.getQuantidade())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        // Utiliozar o reduce para somar os valores dos itens
+        // Utilizar o reduce para somar os valores dos itens
         // O método add de BigDecimal é usado para somar os valores
     }
 }
