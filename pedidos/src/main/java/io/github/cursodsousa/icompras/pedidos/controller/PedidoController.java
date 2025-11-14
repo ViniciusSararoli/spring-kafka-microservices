@@ -1,6 +1,8 @@
 package io.github.cursodsousa.icompras.pedidos.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +24,16 @@ public class PedidoController {
     public ResponseEntity<Object> criar(@RequestBody NovoPedidoDTO novoPedidoDTO) {
         var pedido = pedidoMapper.map(novoPedidoDTO);
         var novoPedido = pedidoService.criar(pedido);
-        var json = "{ \"pedidoId\": "
-                + novoPedido.getIdpedido() + ", \"total\": " + novoPedido.getTotal() + ", \"status\": \""
-                + novoPedido.getStatus() + "\", \"dia\": \"" + novoPedido.getDia() + "\" }";
+        var json = "{ \"pedidoId\": \"" + novoPedido.getIdpedido()
+                + "\", \"total\": \"" + novoPedido.getTotal()
+                + "\", \"status\": \"" + novoPedido.getStatus() 
+                + "\", \"dia\": \"" + novoPedido.getDia() + "\" }";
         return ResponseEntity.ok(json);
+    }
+
+    @GetMapping("/{idpedido}")
+    public ResponseEntity<Object> obterDetalhes(@PathVariable Long idpedido) {
+        var dadosPedido = pedidoService.selecionarPorId(idpedido);
+        return ResponseEntity.ok(dadosPedido);
     }
 }
