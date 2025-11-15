@@ -17,3 +17,10 @@ spring:
 
 server:
   port: 8050
+
+icompraspedidos:
+  client:
+    clientes:
+      url: http://localhost:8040
+    produtos:
+      url: http://localhost:8030
