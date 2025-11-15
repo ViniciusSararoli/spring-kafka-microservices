@@ -1,6 +1,6 @@
-package io.github.cursodsousa.icompras.pedidos.model;
+package io.github.icompras.pedidos.model;
 
-import io.github.cursodsousa.icompras.pedidos.model.enums.MetodoPagamento;
+import io.github.icompras.pedidos.model.enums.MetodoPagamento;
 import lombok.Data;
 
 @Data

@@ -1,4 +1,4 @@
-package io.github.cursodsousa.icompras.pedidos.model.enums;
+package io.github.icompras.pedidos.model.enums;
 
 public enum MetodoPagamento {
     CREDIT_CARD,

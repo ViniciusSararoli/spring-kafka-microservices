@@ -1,4 +1,4 @@
-package io.github.cursodsousa.icompras.pedidos.model;
+package io.github.icompras.pedidos.model;
 
 import java.math.BigDecimal;
 

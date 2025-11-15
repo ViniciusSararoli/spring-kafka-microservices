@@ -1,4 +1,4 @@
-package io.github.cursodsousa.icompras.pedidos;
+package io.github.icompras.pedidos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

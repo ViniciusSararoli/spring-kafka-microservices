@@ -1,11 +1,10 @@
-package io.github.cursodsousa.icompras.pedidos.model;
+package io.github.icompras.pedidos.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import io.github.cursodsousa.icompras.pedidos.model.enums.StatusPedido;
-
+import io.github.icompras.pedidos.model.enums.StatusPedido;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

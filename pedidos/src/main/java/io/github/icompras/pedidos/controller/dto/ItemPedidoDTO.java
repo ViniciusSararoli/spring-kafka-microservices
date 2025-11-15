@@ -1,4 +1,4 @@
-package io.github.cursodsousa.icompras.pedidos.controller.dto;
+package io.github.icompras.pedidos.controller.dto;
 
 import java.math.BigDecimal;
 

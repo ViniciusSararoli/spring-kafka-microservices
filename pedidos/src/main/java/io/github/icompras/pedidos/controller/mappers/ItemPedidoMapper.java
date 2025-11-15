@@ -1,11 +1,12 @@
-package io.github.cursodsousa.icompras.pedidos.controller.mappers;
+package io.github.icompras.pedidos.controller.mappers;
 
-import io.github.cursodsousa.icompras.pedidos.controller.dto.ItemPedidoDTO;
-import io.github.cursodsousa.icompras.pedidos.model.ItemPedido;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
+
+import io.github.icompras.pedidos.controller.dto.ItemPedidoDTO;
+import io.github.icompras.pedidos.model.ItemPedido;
 
 @Mapper(componentModel = "spring")
 public interface ItemPedidoMapper {

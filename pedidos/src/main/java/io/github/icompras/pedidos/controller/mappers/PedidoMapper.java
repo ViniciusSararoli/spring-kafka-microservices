@@ -1,4 +1,4 @@
-package io.github.cursodsousa.icompras.pedidos.controller.mappers;
+package io.github.icompras.pedidos.controller.mappers;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,9 +10,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
-import io.github.cursodsousa.icompras.pedidos.controller.dto.NovoPedidoDTO;
-import io.github.cursodsousa.icompras.pedidos.model.Pedido;
-import io.github.cursodsousa.icompras.pedidos.model.enums.StatusPedido;
+import io.github.icompras.pedidos.controller.dto.NovoPedidoDTO;
+import io.github.icompras.pedidos.model.Pedido;
+import io.github.icompras.pedidos.model.enums.StatusPedido;
 
 @Mapper(componentModel = "spring", uses = ItemPedidoMapper.class)
 public interface PedidoMapper {

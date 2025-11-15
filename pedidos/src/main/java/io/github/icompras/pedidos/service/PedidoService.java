@@ -1,16 +1,16 @@
-package io.github.cursodsousa.icompras.pedidos.service;
+package io.github.icompras.pedidos.service;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.cursodsousa.icompras.pedidos.client.ServicoBancoClient;
-import io.github.cursodsousa.icompras.pedidos.model.Pedido;
-import io.github.cursodsousa.icompras.pedidos.model.enums.StatusPedido;
-import io.github.cursodsousa.icompras.pedidos.repository.ItemPedidoRepository;
-import io.github.cursodsousa.icompras.pedidos.repository.PedidoRepository;
-import io.github.cursodsousa.icompras.pedidos.validator.PedidoValidator;
+import io.github.icompras.pedidos.client.ServicoBancoClient;
+import io.github.icompras.pedidos.model.Pedido;
+import io.github.icompras.pedidos.model.enums.StatusPedido;
+import io.github.icompras.pedidos.repository.ItemPedidoRepository;
+import io.github.icompras.pedidos.repository.PedidoRepository;
+import io.github.icompras.pedidos.validator.PedidoValidator;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
