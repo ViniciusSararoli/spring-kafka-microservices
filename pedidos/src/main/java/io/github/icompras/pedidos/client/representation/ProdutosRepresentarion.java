@@ -2,6 +2,8 @@ package io.github.icompras.pedidos.client.representation;
 
 import java.math.BigDecimal;
 
-public record ProdutosRepresentarion(Long idProduto, String nome, BigDecimal valor) {
-    
+// Deve ter os mesmos aributos do modelo de produtos
+public record ProdutosRepresentarion(
+        Long idproduto, String nome, BigDecimal valor) {
+
 }
