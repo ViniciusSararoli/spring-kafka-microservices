@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.icompras.pedidos.client.ServicoBancoClient;
 import io.github.icompras.pedidos.model.Pedido;
-import io.github.icompras.pedidos.model.enums.StatusPedido;
+
 import io.github.icompras.pedidos.repository.ItemPedidoRepository;
 import io.github.icompras.pedidos.repository.PedidoRepository;
 import io.github.icompras.pedidos.validator.PedidoValidator;
