@@ -1,5 +1,6 @@
 package io.github.icompras.pedidos.controller;
 
+import io.github.icompras.pedidos.model.ResponseData;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.github.icompras.pedidos.controller.dto.NovoPedidoDTO;
 import io.github.icompras.pedidos.controller.mappers.PedidoMapper;
+import io.github.icompras.pedidos.model.exception.ValidationException;
 import io.github.icompras.pedidos.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 
@@ -22,13 +24,15 @@ public class PedidoController {
 
     @PostMapping
     public ResponseEntity<Object> criar(@RequestBody NovoPedidoDTO novoPedidoDTO) {
-        var pedido = pedidoMapper.map(novoPedidoDTO);
-        var novoPedido = pedidoService.criar(pedido);
-        var json = "{ \"pedidoId\": \"" + novoPedido.getIdpedido()
-                + "\", \"total\": \"" + novoPedido.getTotal()
-                + "\", \"status\": \"" + novoPedido.getStatus() 
-                + "\", \"dia\": \"" + novoPedido.getDia() + "\" }";
-        return ResponseEntity.ok(json);
+        try {
+            var pedido = pedidoMapper.map(novoPedidoDTO);
+            var novoPedido = pedidoService.criar(pedido);
+            var successResponse = new ResponseData.success("Pedido criado com sucesso", novoPedido.getIdpedido(), novoPedido.getTotal(), novoPedido.getStatus(), novoPedido.getDia());
+            return ResponseEntity.ok(successResponse);
+        } catch (ValidationException e) {
+            var errorResponse = new ResponseData.error("Validation Error", e.getField(), e.getMessage());
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
     }
 
     @GetMapping("/{idpedido}")
