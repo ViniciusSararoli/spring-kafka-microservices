@@ -59,7 +59,7 @@ public class PedidoService {
     private void enviarSolicitacaoPagamento(Pedido pedido) {
         var pagamentoId = servicoBancoClient.solicitarPagamento(pedido);
         pedido.setIdPagamento(pagamentoId);
-        pedido.setStatus(StatusPedido.PAGAMENTO_APROVADO); // Atualiza o status para o próximo estágio
+        //pedido.setStatus(StatusPedido.PAGAMENTO_APROVADO); // Atualiza o status para o próximo estágio
     }
 
     // Notação serve para suprimir avisos de nullabilidade
