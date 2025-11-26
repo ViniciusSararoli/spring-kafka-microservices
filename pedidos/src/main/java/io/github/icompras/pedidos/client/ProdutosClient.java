@@ -11,7 +11,7 @@ import io.github.icompras.pedidos.client.representation.ProdutosRepresentarion;
 @FeignClient(name = "produtos-client", url = "${icompraspedidos.client.produtos.url}")
 public interface ProdutosClient {
 
-     @GetMapping("{idproduto}")
+     @GetMapping("/produtos/{idproduto}")
     public ResponseEntity<ProdutosRepresentarion> obterDados(@PathVariable("idproduto") Long idproduto);
     
 }
