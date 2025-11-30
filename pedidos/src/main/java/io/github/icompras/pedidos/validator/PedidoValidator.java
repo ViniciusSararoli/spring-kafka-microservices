@@ -34,7 +34,7 @@ public class PedidoValidator {
     // Validação de cada item no pedido
     private void validarProdutos(ItemPedido item) {
         try {
-           // Chama o serviço de produtos para validar se o produto existe
+            // Chama o serviço de produtos para validar se o produto existe
             ResponseEntity<ProdutosRepresentarion> response = produtosClient.obterDados(item.getIdProduto());
             ProdutosRepresentarion produto = response.getBody();
             log.info("Produto {} encontrado: {}", produto.idproduto(), produto.nome());
@@ -46,7 +46,7 @@ public class PedidoValidator {
     // Validação para indentificar se o cliente existe
     private void validarCliente(Long idCliente) {
         try {
-           // Chama o serviço de clientes para validar se o cliente existe
+            // Chama o serviço de clientes para validar se o cliente existe
             ResponseEntity<ClientesRepresentation> response = clientesClient.obterDados(idCliente);
             ClientesRepresentation cliente = response.getBody();
             log.info("Cliente encontrado: {}", cliente.nome());
