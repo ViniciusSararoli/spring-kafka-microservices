@@ -1,4 +1,4 @@
-package io.github.cursodsousa.icompras.clientes.service;
+package io.github.icompras.clientes.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.github.cursodsousa.icompras.clientes.model.Endereco;
-import io.github.cursodsousa.icompras.clientes.repository.EnderecoRepository;
+import io.github.icompras.clientes.model.Endereco;
+import io.github.icompras.clientes.repository.EnderecoRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service

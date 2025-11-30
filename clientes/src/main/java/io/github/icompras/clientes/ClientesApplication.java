@@ -1,4 +1,4 @@
-package io.github.cursodsousa.icompras.clientes;
+package io.github.icompras.clientes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,8 +1,8 @@
-package io.github.cursodsousa.icompras.clientes.repository;
+package io.github.icompras.clientes.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import io.github.cursodsousa.icompras.clientes.model.Clientes;
+import io.github.icompras.clientes.model.Clientes;
 import org.springframework.stereotype.Repository;
 
 @Repository

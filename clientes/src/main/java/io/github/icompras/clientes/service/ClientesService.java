@@ -1,11 +1,11 @@
-package io.github.cursodsousa.icompras.clientes.service;
+package io.github.icompras.clientes.service;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import io.github.cursodsousa.icompras.clientes.model.Clientes;
-import io.github.cursodsousa.icompras.clientes.repository.ClientesRepository;
+import io.github.icompras.clientes.model.Clientes;
+import io.github.icompras.clientes.repository.ClientesRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service

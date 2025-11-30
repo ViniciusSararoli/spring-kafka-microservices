@@ -1,4 +1,4 @@
-package io.github.cursodsousa.icompras.clientes.controller;
+package io.github.icompras.clientes.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.cursodsousa.icompras.clientes.model.Clientes;
-import io.github.cursodsousa.icompras.clientes.service.ClientesService;
+import io.github.icompras.clientes.model.Clientes;
+import io.github.icompras.clientes.service.ClientesService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
