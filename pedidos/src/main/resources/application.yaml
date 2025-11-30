@@ -24,3 +24,5 @@ icompraspedidos:
       url: http://localhost:8040
     produtos:
       url: http://localhost:8030
+  pagamentos:
+    apikey: 4f8b3c2a1d6e9f0b1234567890abcdef
