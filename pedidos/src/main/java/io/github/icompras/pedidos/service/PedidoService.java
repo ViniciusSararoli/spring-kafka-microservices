@@ -7,14 +7,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import io.github.icompras.pedidos.client.ServicoBancoClient;
 import io.github.icompras.pedidos.model.Pedido;
-
+import io.github.icompras.pedidos.model.enums.StatusPedido;
 import io.github.icompras.pedidos.repository.ItemPedidoRepository;
 import io.github.icompras.pedidos.repository.PedidoRepository;
 import io.github.icompras.pedidos.validator.PedidoValidator;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 // Cria um construtor com todo os argumentos obrigatórios
 @RequiredArgsConstructor
 public class PedidoService {
@@ -59,12 +61,34 @@ public class PedidoService {
     private void enviarSolicitacaoPagamento(Pedido pedido) {
         var pagamentoId = servicoBancoClient.solicitarPagamento(pedido);
         pedido.setIdPagamento(pagamentoId);
-        //pedido.setStatus(StatusPedido.PAGAMENTO_APROVADO); // Atualiza o status para o próximo estágio
     }
 
     // Notação serve para suprimir avisos de nullabilidade
     @SuppressWarnings("null")
     public Optional<Pedido> selecionarPorId(Long idpedido) {
         return pedidoRepository.findById(idpedido);
+    }
+
+    public void processarCallbackPagamento(
+            Long pedidoId, String idPagamento, Boolean status, String observacoes) {
+
+        var infoPedido = pedidoRepository.findByIdpedidoAndIdPagamento(pedidoId, idPagamento);
+
+        if (infoPedido.isEmpty()) {
+            var mensagem = String.format("Pedido com ID %d e pagamento %s não encontrado", pedidoId, idPagamento);
+            log.error(mensagem);
+            return;
+        }
+        
+        if (infoPedido.isPresent()) {
+            var pedidoEncontrado = infoPedido.get();
+            if (status) {
+                pedidoEncontrado.setStatus(StatusPedido.PAGAMENTO_APROVADO);
+            } else {
+                pedidoEncontrado.setStatus(StatusPedido.ERRO_PAGAMENTO);
+            }
+            pedidoEncontrado.setObservacoes(observacoes);
+            pedidoRepository.save(pedidoEncontrado);
+        }
     }
 }
