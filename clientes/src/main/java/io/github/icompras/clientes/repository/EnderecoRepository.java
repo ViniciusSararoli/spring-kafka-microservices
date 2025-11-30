@@ -1,11 +1,11 @@
-package io.github.cursodsousa.icompras.clientes.repository;
+package io.github.icompras.clientes.repository;
 
 import java.util.List;
 // import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import io.github.cursodsousa.icompras.clientes.model.Endereco;
+import io.github.icompras.clientes.model.Endereco;
 import org.springframework.stereotype.Repository;
 
 @Repository
