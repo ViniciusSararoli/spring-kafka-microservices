@@ -1,7 +1,8 @@
 # spring-kafka-api
 
-Financial control system to help people organize their money
+Projeto de microsserviços usando Spring Boot 3.x, Kafka, JPA, PostgreSQL e JasperReports
 
+# Requisitos para rodar o projeto
 https://www.oracle.com/java/technologies/downloads/
 
 Necessário  baixar o SDK e editar as variáveis de ambiente do sistema
@@ -35,7 +36,8 @@ docker ps
 
 # Usar para realizar conexão sincrona com outros microsserviços
 https://spring.io/projects/spring-cloud-openfeign
+
 # Adicionar dependência no pom.xml
-<!-- <spring-cloud.version>2022.0.4</spring-cloud.version> -->
+
 # Está disponivel apensa para Spring Boot 3.4.x
 
