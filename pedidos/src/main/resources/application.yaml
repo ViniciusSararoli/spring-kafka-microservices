@@ -28,8 +28,8 @@ icompraspedidos:
     apikey: 4f8b3c2a1d6e9f0b1234567890abcdef
   config:
     kafka:
+      url: http://localhost:8021
       topics:
         envio: icompras.pedido-enviado
         pagamento: icompras.pedido-pago
         faturamento: icompras.pedido-faturado
-      url: localhost:8021
