@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.github.icompras.pedidos.client.ServicoBancoClient;
+import io.github.icompras.pedidos.model.DadosPagamento;
 import io.github.icompras.pedidos.model.Pedido;
 import io.github.icompras.pedidos.model.enums.StatusPedido;
+import io.github.icompras.pedidos.model.exception.PedidoNaoEncontradoException;
 import io.github.icompras.pedidos.repository.ItemPedidoRepository;
 import io.github.icompras.pedidos.repository.PedidoRepository;
 import io.github.icompras.pedidos.validator.PedidoValidator;
@@ -64,7 +66,6 @@ public class PedidoService {
     }
 
     // Notação serve para suprimir avisos de nullabilidade
-    @SuppressWarnings("null")
     public Optional<Pedido> selecionarPorId(Long idpedido) {
         return pedidoRepository.findById(idpedido);
     }
@@ -89,6 +90,33 @@ public class PedidoService {
             }
             pedidoEncontrado.setObservacoes(observacoes);
             pedidoRepository.save(pedidoEncontrado);
+        }
+    }
+
+    @Transactional
+    public void adicionarNovoPagamento(Long pedidoId, String detalhesPagamento, String metodoPagamento) {
+        var infoPedido = pedidoRepository.findById(pedidoId);
+
+        if (infoPedido.isEmpty()) {
+            var mensagem = String.format("Pedido com ID %d não encontrado", pedidoId);
+             throw new PedidoNaoEncontradoException(mensagem);
+        }
+
+        if (infoPedido.isPresent()) {
+            var pedidoEncontrado = infoPedido.get();
+
+            DadosPagamento dadosPagamento = new DadosPagamento();
+            dadosPagamento.setDetalhesPagamento(detalhesPagamento);
+            dadosPagamento.setMetodoPagamento(null);
+
+            pedidoEncontrado.setDadosPagamento(dadosPagamento);   
+            pedidoEncontrado.setStatus(StatusPedido.PAGAMENTO_REALIZADO);  
+            pedidoEncontrado.setObservacoes("Novo pagamento realizado com sucesso, pedido em preparação.");   
+            // Não é necessário chamar save explicitamente devido à anotação @Transactional   
+            pedidoRepository.save(pedidoEncontrado);
+
+            String pagamentoId = servicoBancoClient.solicitarPagamento(pedidoEncontrado);
+            pedidoEncontrado.setIdPagamento(pagamentoId);
         }
     }
 }
