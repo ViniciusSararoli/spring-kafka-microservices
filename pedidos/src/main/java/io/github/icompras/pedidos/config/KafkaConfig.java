@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 @Configuration
 public class KafkaConfig {
 
-    @Value("${icompraspedidos.config.kafka.url}")
+    @Value("${icompraspedidos.config.kafka.server-url}")
     private String serverUrl;
 
     @Bean
