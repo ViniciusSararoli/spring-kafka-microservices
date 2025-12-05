@@ -16,7 +16,7 @@ spring:
         format_sql: true
 
 server:
-  port: 8050
+  port: 8051
 
 icompraspedidos:
   client:
@@ -26,3 +26,10 @@ icompraspedidos:
       url: http://localhost:8030
   pagamentos:
     apikey: 4f8b3c2a1d6e9f0b1234567890abcdef
+  config:
+    kafka:
+      topics:
+        envio: icompras.pedido-enviado
+        pagamento: icompras.pedido-pago
+        faturamento: icompras.pedido-faturado
+      url: localhost:8021
