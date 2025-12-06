@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import io.github.icompras.pedidos.client.representation.ClientesRepresentation;
 import io.github.icompras.pedidos.model.enums.StatusPedido;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -61,4 +62,7 @@ public class Pedido {
 
     @OneToMany(mappedBy = "pedido") // relacionamento é mapeado pelo campo 'pedido' em ItemPedido
     private List<ItemPedido> itens;
+
+    @Transient
+    private ClientesRepresentation dadosCliente;
 }

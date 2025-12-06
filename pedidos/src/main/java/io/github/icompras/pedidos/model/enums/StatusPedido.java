@@ -9,5 +9,6 @@ public enum StatusPedido {
     FINALIZADO,             // 4
     CANCELADO,              // 5
     REEMBOLSO,              // 6
-    ERRO_PAGAMENTO          // 7
+    ERRO_PAGAMENTO,         // 7
+    PAGAMENTO_REALIZADO     // 8
 }

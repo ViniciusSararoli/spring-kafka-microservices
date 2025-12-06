@@ -41,3 +41,34 @@ https://spring.io/projects/spring-cloud-openfeign
 
 # Está disponivel apensa para Spring Boot 3.4.x
 
+# Adicionar Apache Kafka no projeto 
+
+Será necessário três imagens para rodar o Kafka no Docker
+
+1 - Zookeeper - Para gerenciamento do Broker
+https://hub.docker.com/r/confluentinc/cp-zookeeper
+
+2 - Kafka Broker - Responsável por gerenciar as mensagens
+https://hub.docker.com/r/confluentinc/cp-kafka
+
+3 - Kafka UI - Interface web para monitoramento do Kafka
+https://hub.docker.com/r/provectuslabs/kafka-ui
+
+# Usar na pasta database do prejeto servicos usando 'cd servicos/kafka/'
+docker compose up -d
+
+Caso necessário alterar as portas, editar o arquivo compose.yaml
+
+Usar 'docker compose down' para parar os containers
+
+# Documentação do Confluent Kafka
+https://docs.confluent.io/platform/current/installation/docker/config-reference.html#confluent-ak-configuration
+
+
+docker pull confluentinc/cp-kafka:7.9.5
+
+# Documentação do Spring Kafka
+https://spring.io/projects/spring-kafka
+
+netstat -ano | findstr "8050"
+

@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +24,7 @@ public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long iditem_pedido;
-
+    
     @JoinColumn(name = "idpedido")
     @ManyToOne // Relação muitos para um com a classe Pedido
     private Pedido pedido;
@@ -36,5 +37,8 @@ public class ItemPedido {
 
     @Column(name = "valor", nullable = false, precision = 16, scale = 2)
     private BigDecimal valor;
+
+    @Transient
+    private String nomeProduto;
 
 }

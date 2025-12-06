@@ -32,6 +32,7 @@ public class PedidoValidator {
     }
 
     // Validação de cada item no pedido
+    @SuppressWarnings("null")
     private void validarProdutos(ItemPedido item) {
         try {
             // Chama o serviço de produtos para validar se o produto existe
@@ -44,6 +45,7 @@ public class PedidoValidator {
     }
 
     // Validação para indentificar se o cliente existe
+    @SuppressWarnings("null")
     private void validarCliente(Long idCliente) {
         try {
             // Chama o serviço de clientes para validar se o cliente existe
