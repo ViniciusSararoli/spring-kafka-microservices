@@ -127,7 +127,7 @@ public class PedidoService {
         }
     }
 
-    public Optional<Pedido> carregarDadosPedid(Long idpedido) {
+    public Optional<Pedido> carregarDadosPedido(Long idpedido) {
         Optional<Pedido> pedidoOpt = pedidoRepository.findById(idpedido);
         pedidoOpt.ifPresent(this::carregarDadosCliente);
         pedidoOpt.ifPresent(this::carregarItensPedido);
